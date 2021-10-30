@@ -1,0 +1,13 @@
+apiVersion: v2
+appVersion: 4.3.11
+dependencies:
+- name: postgresql
+  repository: '@bitnami'
+  version: 6.5.0
+- name: redis
+  repository: '@bitnami'
+  version: 9.4.3
+description: A Helm chart for Kubernetes
+name: postfacto
+type: application
+version: 0.5.0-beta
