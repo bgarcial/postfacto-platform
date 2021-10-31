@@ -105,20 +105,20 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 3000
-            #- name: http
-            #  containerPort: 3000
-            #  protocol: TCP
+            #- containerPort: 3000
+            - name: http
+              containerPort: 3000
+              protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              # port: http
-              port: 3000
+              port: http
+              # port: 3000
           readinessProbe:
             httpGet:
               path: /
-              # port: http
-              port: 3000
+              port: http
+              # port: 3000
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
