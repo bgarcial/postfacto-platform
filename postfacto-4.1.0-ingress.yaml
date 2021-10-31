@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod # letsencrypt-staging
+  name: postfacto-4-1-0-ingress
+  namespace: postfacto-4-1-0
+spec:
+  tls:
+    - hosts:
+      - postfacto-4-1-0.bgarcial.me
+      secretName: letsencrypt-prod
+  rules:
+    - host: postfacto-4-1-0.bgarcial.me
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: postfacto-4-1-0
+              port:
+                number: 80
