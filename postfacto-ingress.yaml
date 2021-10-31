@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # add an annotation indicating the issuer to use.
+    cert-manager.io/cluster-issuer: letsencrypt-staging # letsencrypt-prod
+    ingressClassName: nginx
+  name: postfacto-ingress
+  namespace: default
+spec:
+  rules:
+  - host: postfacto.bgarcial.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: postfacto
+            port:
+              number: 80
+        path: /
+  tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
+  - hosts:
+    - postfacto.bgarcial.me
+    secretName: letsencrypt-staging # < cert-manager will store the created certificate in this secret.
+
