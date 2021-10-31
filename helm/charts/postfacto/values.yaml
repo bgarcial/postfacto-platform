@@ -31,7 +31,7 @@
 replicaCount: 1
 
 image:
-  repository: postfacto/postfacto
+  repository: postfacto/postfacto:4.1.0 # postfacto/postfacto
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
