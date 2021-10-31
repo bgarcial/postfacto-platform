@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+  name: postfacto-ingress
+spec:
+  # ingressClassName: postfacto-class
+  tls:
+    - hosts:
+      - postfacto.bgarcial.me
+      # This assumes tls-secret exists and the SSL
+      # certificate contains a CN for foo.bar.com
+      secretName: letsencrypt-staging
+  rules:
+    - host: postfacto.bgarcial.me
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            # This assumes http-svc exists and routes to healthy endpoints
+            service:
+              name: postfacto
+              port:
+                number: 80
