@@ -128,3 +128,22 @@ Specific [docker public images](https://hub.docker.com/r/postfacto/postfacto) fo
 I wanted to check [the way to define custom headers on nginx ingress controller](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-headers/) since it is considered my kind of gateway resource
 but I couldn't find the time to do it. It was the only requirement that was missing from my side
 
+---
+
+4. MAINTAINING THE SYSTEM
+
+The deployment of postfacto applications version is a release pipeline centered approach, so this has the following tasks
+which ones you can see them [here](https://dev.azure.com/bgarcial/postfacto-infra/_releaseDefinition?definitionId=4&_a=definition-tasks&environmentId=4)
+
+Most of them are bash and Kubernetes tasks, being this a single approach to delivery the application, so is there
+where the bash tasks that support nginx, cert-manager and postfacto itself deployments via helm commands need to be
+modified when new versions of them need to be deployed.
+
+--- 
+
+**TO DISCUSS OR CONSIDER**
+
+I defined the deployments via release pipelines via bash tasks mostly, but I think for traceability and maintainability of yaml in source control
+is better to define all of them in pipelines like I did with the [terraform deployment workflow](https://github.com/bgarcial/postfacto-infra/blob/staging/azure-pipelines.yml)
+Having a more explicit defined azure pipeline yaml script, makes easier to work with others by versioning that file via git, 
+and it's much less likely that we simply forget or don't notice some difference between stages.
